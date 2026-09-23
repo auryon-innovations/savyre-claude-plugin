@@ -1,0 +1,12 @@
+{
+  "name": "savyre",
+  "version": "0.2.0",
+  "description": "Savyre Chat workflow for Claude Code — thin adapter over the shared Savyre guard (same brain as Cursor).",
+  "author": {
+    "name": "Savyre"
+  },
+  "keywords": ["savyre", "workflow", "stages", "chat", "hooks"],
+  "skills": "./skills",
+  "commands": "./commands",
+  "hooks": "./hooks/hooks.json"
+}

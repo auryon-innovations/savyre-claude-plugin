@@ -52,7 +52,9 @@ const EXPECTED_COMMANDS = [
   'savyre-turn.md',
   'savyre-answer.md',
   'savyre-stop.md',
-  'savyre-status.md'
+  'savyre-status.md',
+  'savyre-help.md',
+  'savyre-export.md'
 ];
 
 const STAGE_ROLES = [

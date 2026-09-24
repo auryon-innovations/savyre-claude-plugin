@@ -8,9 +8,11 @@
  * decision format.
  *
  * No Savyre methodology lives here — enforcement stays in the shared guard.
+ * Stop / SubagentStop also persist Claude transcript tokens onto the current stage.
  */
 import { spawnSync } from 'child_process';
 import { resolveGuardPath } from './resolveGuard.mjs';
+import { recordClaudeChatUsageFromHook } from './savyre-claude-usage.mjs';
 
 const EVENT_MAP = {
   PreToolUse: 'preToolUse',
@@ -222,6 +224,15 @@ async function main() {
 
   const event = claudeEvent(raw) || 'PreToolUse';
   const cursorInput = toCursorHookInput(raw);
+
+  if (event === 'Stop' || event === 'SubagentStop') {
+    try {
+      await recordClaudeChatUsageFromHook(raw, cursorInput);
+    } catch (err) {
+      process.stderr.write(`[savyre-claude-usage] ${err?.stack || err}\n`);
+    }
+  }
+
   const cursorOut = runGuardHook(cursorInput);
 
   if (cursorOut?.missing) {

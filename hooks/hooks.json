@@ -41,6 +41,16 @@
           }
         ]
       }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/savyre-claude-hook.mjs\""
+          }
+        ]
+      }
     ]
   }
 }

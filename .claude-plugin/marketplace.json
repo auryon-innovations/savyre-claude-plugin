@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Local / team marketplace for the Savyre Claude Code plugin.",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   "plugins": [
     {
       "name": "savyre",
       "source": "./",
       "description": "Savyre Chat workflow for Claude Code (hooks + slash commands + skills).",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "author": {
         "name": "Savyre"
       },

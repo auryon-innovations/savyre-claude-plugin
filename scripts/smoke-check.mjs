@@ -9,6 +9,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { resolveGuardPath } from '../hooks/resolveGuard.mjs';
 import { toCursorHookInput, toClaudeHookOutput } from '../hooks/savyre-claude-hook.mjs';
+import {
+  collectRequestUsage,
+  mapClaudeUsageToTurn,
+  mergeChatUsage,
+  parseTranscriptJsonl,
+  turnUsageFromTranscript
+} from '../hooks/savyre-claude-usage.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 let failed = 0;
@@ -52,6 +59,52 @@ function assert(cond, msg) {
     out.hookSpecificOutput?.additionalContext?.includes('enforced'),
     'sessionStart additional_context maps'
   );
+}
+
+{
+  const turn = mapClaudeUsageToTurn({
+    input_tokens: 10,
+    output_tokens: 2,
+    cache_read_input_tokens: 5
+  });
+  assert(turn?.prompt_tokens === 15 && turn.total_tokens === 17, 'maps Claude cache tokens into prompt');
+}
+
+{
+  const text = [
+    JSON.stringify({
+      requestId: 'r1',
+      message: {
+        model: 'claude-sonnet-4-5',
+        usage: { input_tokens: 100, output_tokens: 4, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 }
+      }
+    }),
+    JSON.stringify({
+      requestId: 'r1',
+      message: {
+        model: 'claude-sonnet-4-5',
+        usage: { input_tokens: 100, output_tokens: 9, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 }
+      }
+    })
+  ].join('\n');
+  const byId = collectRequestUsage(parseTranscriptJsonl(text));
+  assert(byId.get('r1')?.completion_tokens === 9, 'takes max streamed output per requestId');
+  const first = turnUsageFromTranscript(text, { requests: {} });
+  const again = turnUsageFromTranscript(text, { requests: first.nextRequests });
+  assert(first.turnUsage?.total_tokens === 109, 'first transcript pass counts the request');
+  assert(again.turnUsage == null, 'second pass does not double-count');
+}
+
+{
+  const merged = mergeChatUsage(null, {
+    prompt_tokens: 10,
+    completion_tokens: 2,
+    total_tokens: 12,
+    source: 'provider',
+    model: 'claude-sonnet-4-5'
+  });
+  assert(merged.ai_usage?.tool === 'claude-chat', 'merge tags tool claude-chat');
+  assert(merged.ai_usage?.usage_source === 'provider', 'merge marks provider usage');
 }
 
 const guard = resolveGuardPath();

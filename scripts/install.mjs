@@ -58,7 +58,8 @@ function hooksConfig() {
         }
       ],
       SessionStart: [{ hooks: [{ type: 'command', command: hookCmd }] }],
-      Stop: [{ hooks: [{ type: 'command', command: hookCmd }] }]
+      Stop: [{ hooks: [{ type: 'command', command: hookCmd }] }],
+      SubagentStop: [{ hooks: [{ type: 'command', command: hookCmd }] }]
     }
   };
 }

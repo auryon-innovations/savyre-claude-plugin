@@ -7,7 +7,7 @@ Thin **Claude Code** adapter for the same Savyre Chat workflow used in Cursor.
 - Speaks the same JSON `userMessage` / `nextBacklogItemId` contract
 - Ships the **full Cursor skills pack** + seven-stage candidate skills
 
-**Version:** 0.2.0
+**Version:** 0.2.1
 
 ## What you get
 
@@ -71,6 +71,7 @@ See [MARKETPLACE.md](./MARKETPLACE.md) for team distribute + public Anthropic di
 
 ```powershell
 node scripts/smoke-check.mjs
+node --test scripts/test-claude-usage.mjs
 node scripts/parity-matrix.mjs
 node scripts/parity-matrix.mjs C:\path\to\savyre-project
 ```
@@ -97,8 +98,11 @@ node scripts/parity-matrix.mjs
 | `PreToolUse` (Bash/Edit/Write/…) | `preToolUse` |
 | `PostToolUse` (Edit/Write/…) | `afterFileEdit` |
 | `SessionStart` | `sessionStart` |
-| `Stop` | `stop` |
+| `Stop` | `stop` + persist Chat tokens onto the current stage |
+| `SubagentStop` | `stop` + persist Task-tool tokens onto the current stage |
 | tool `Edit` | `StrReplace` (write gate) |
+
+Claude Code does not put tokens on `Stop` stdin. The hook reads `transcript_path` JSONL (`message.usage`), counts each `requestId` once (max streamed `output_tokens`), and merges **provider** usage onto `savyre/stages/<current>/metadata.json` as `tool: claude-chat`. The extension sums those stages for the workflow total. List-price `estimated_cost_usd` is not Anthropic’s invoice. CLI `claude-cli` provider counts are never overwritten.
 
 ## Layout
 

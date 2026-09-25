@@ -3,3 +3,6 @@ node_modules/
 *.log
 .tmp/
 skills/.sync-manifest.json
+# Savyre workflow session artifacts (do not commit)
+.savyre/
+savyre/

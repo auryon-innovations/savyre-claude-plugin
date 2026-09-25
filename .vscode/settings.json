@@ -1,0 +1,18 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.jj": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/.savyre": true,
+        "**/.cursor/hooks": true,
+        "**/.cursor/hooks.json": true,
+        "**/.cursor/rules/savyre-ai-workflow.mdc": true,
+        "**/savyre/prompts": true,
+        "**/SAVYRE_INSTRUCTIONS.md": true,
+        "**/.github/copilot-instructions.md": true,
+        "**/CLAUDE.md": true
+    }
+}

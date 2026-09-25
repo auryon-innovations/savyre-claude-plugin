@@ -1,0 +1,14 @@
+---
+description: Savyre AI Coding Workflow — follow stage prompts and save artifacts under savyre/stages/
+globs:
+alwaysApply: true
+---
+
+# Savyre AI Coding Workflow
+
+When the user is in a Savyre workflow session:
+
+- Follow the active stage prompt from the Savyre panel.
+- Write stage outputs to the paths listed in each stage (completion SoT is `final.md`).
+- Do not modify protected files listed in `.savyre/config.json`.
+- After Stage 01, only edit `developer-review.md`; other stage artifacts are AI/system-owned.

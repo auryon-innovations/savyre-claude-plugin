@@ -1,5 +1,16 @@
 {
   "schemaVersion": "1.0.0",
-  "activeSessionId": null,
-  "sessions": []
+  "activeSessionId": "wf_b734eb48fa8532d0",
+  "sessions": [
+    {
+      "sessionId": "wf_b734eb48fa8532d0",
+      "status": "initialized",
+      "updatedAt": "2026-09-25T04:40:51.670Z",
+      "currentStageId": "01-task-input",
+      "completedStages": 0,
+      "totalStages": 15,
+      "location": "hot",
+      "title": "Savyre AI Coding Workflow"
+    }
+  ]
 }

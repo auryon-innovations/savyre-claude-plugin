@@ -77,6 +77,7 @@ export function toCursorHookInput(raw) {
   const mappedEvent = EVENT_MAP[event] || event.toLowerCase();
   const toolName = normalizeToolName(raw?.tool_name || raw?.toolName);
   const toolInput = raw?.tool_input && typeof raw.tool_input === 'object' ? { ...raw.tool_input } : {};
+  const shellAfter = event === 'PostToolUse' && (toolName === 'Bash' || toolName === 'PowerShell');
   const filePath = filePathFromClaude(raw);
   if (filePath && !toolInput.path && !toolInput.file_path) {
     toolInput.path = filePath;
@@ -86,11 +87,12 @@ export function toCursorHookInput(raw) {
   if (command && !toolInput.command) toolInput.command = command;
 
   return {
-    hook_event_name: mappedEvent,
-    hookEventName: mappedEvent,
+    hook_event_name: shellAfter ? 'afterShellExecution' : mappedEvent,
+    hookEventName: shellAfter ? 'afterShellExecution' : mappedEvent,
     tool_name: toolName,
     tool: toolName,
     tool_input: toolInput,
+    tool_response: raw?.tool_response || raw?.tool_output || null,
     file_path: filePath,
     command,
     cwd: raw?.cwd || process.env.CLAUDE_PROJECT_DIR || process.cwd(),

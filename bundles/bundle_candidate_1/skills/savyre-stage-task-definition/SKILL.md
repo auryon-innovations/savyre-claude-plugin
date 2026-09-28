@@ -28,7 +28,7 @@ Read `references/invocation-map.md` before selecting a dedicated/shared pass. S0
 1. Capture exact designated original task separately from a helpful restatement; distinguish product requirements from workflow instructions.
 2. Extract supported requirements and observable criteria; include user stories only when actor/value helps feature work. Link story/criterion to requirement/source; technical fixes need no forced story.
 3. Challenge for contradictions, inferred features, vague acceptance or unaccepted assumptions. Ask one material blocking question at a time with stable runtime IDs; reuse resolved decisions. Do not ask routine questions unrelated to the task.
-4. Revise analyzed brief after answers, then request one final confirmation of the current complete contract (including every active AC). Reopened scope creates a new draft/revision.
+4. Revise analyzed brief after answers, then request one final confirmation of the current complete contract. **Call out Acceptance Criteria by ID** and ask the developer to approve that exact AC set before lock. Reopened scope creates a new draft/revision.
 
 ## Output contract
 Produce a concise response with outcome, material question/blocker if any and the verified next action. Detailed content belongs in the assigned draft `task_brief.md` or returned preview content when no writer is delegated.
@@ -37,7 +37,7 @@ Draft sections: **Original Task; Understanding; Requirements; User Stories (if a
 
 Required supporting content: Original text; stable requirement/story/criterion/source links; constraints/exclusions; confirmed decisions and explicitly accepted assumptions; runtime confirmation/final revision refs. Preview payload has no fabricated approved state.
 
-Confirmation boundary: Request one final S01 task-contract confirmation after analysis/challenge; no confirmation is implied by the draft. Chat cannot stamp approval or unlock the stage.
+Confirmation boundary: After the draft lists every active **AC-###**, speak `userMessage` and explicitly ask the developer to **approve those acceptance criteria** (exact wording/IDs), not only the overall brief. One final S01 task-contract confirmation after analysis/challenge; no confirmation is implied by the draft. Chat cannot stamp approval or unlock the stage. In your own 1–2 substance sentences before `userMessage`, name the AC IDs (e.g. AC-001…AC-00N) and ask whether that set is approved.
 
 Final handoff: After required task confirmation/validation, runtime publishes final.md and contract projection for S02/S03. Unanswered material question remains unapproved.
 

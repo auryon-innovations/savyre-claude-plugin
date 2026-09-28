@@ -180,7 +180,7 @@ function runGuardHook(cursorInput) {
       ok: false,
       missing: true,
       message:
-        'Savyre guard not found. Install savyre-cursor-plugin next to this pack, or set SAVYRE_GUARD_PATH.'
+        'Savyre guard not found. Set the plugin option "Savyre guard path" to savyre-guard.mjs, or place savyre-cursor-plugin next to this pack.'
     };
   }
   const result = spawnSync(process.execPath, [guard], {

@@ -6,17 +6,13 @@
  * Usage: node scripts/sync-skills.mjs
  */
 import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'fs';
-import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
-const home = os.homedir();
-
 const CURSOR_CANDIDATES = [
-  path.join(home, 'Documents', 'Projects', 'savyre-cursor-plugin'),
-  path.join(home, '.cursor', 'plugins', 'local', 'savyre-cursor-plugin'),
+  path.join(ROOT, '..', 'savyre-cursor-plugin'),
   process.env.SAVYRE_CURSOR_PLUGIN_ROOT || ''
 ].filter(Boolean);
 
@@ -36,7 +32,7 @@ function copyTree(src, dst) {
 const cursorRoot = resolveCursorRoot();
 if (!cursorRoot) {
   process.stderr.write(
-    'savyre-cursor-plugin not found. Set SAVYRE_CURSOR_PLUGIN_ROOT or install sibling/local plugin.\n'
+    'savyre-cursor-plugin not found. Place it next to this pack, or set SAVYRE_CURSOR_PLUGIN_ROOT.\n'
   );
   process.exit(1);
 }

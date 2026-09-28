@@ -1,31 +1,27 @@
 /**
  * Resolve the shared Savyre guard script (same brain as Cursor).
- * Prefer env, then sibling cursor plugin, then common install paths.
+ * Prefer the sensitive plugin option, then a sibling checkout next to this pack.
+ * Do not scan the user home directory.
  */
 import { existsSync } from 'fs';
-import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PLUGIN_ROOT = path.resolve(HERE, '..');
-const HOME = os.homedir();
+
+function configuredGuardPath() {
+  const raw = process.env.CLAUDE_PLUGIN_OPTION_SAVYRE_GUARD_PATH;
+  return typeof raw === 'string' ? raw.trim() : '';
+}
 
 export function resolveGuardPath() {
-  const env = typeof process.env.SAVYRE_GUARD_PATH === 'string'
-    ? process.env.SAVYRE_GUARD_PATH.trim()
-    : '';
-  if (env && existsSync(env)) return env;
+  const configured = configuredGuardPath();
+  if (configured && existsSync(configured)) return configured;
 
-  const candidates = [
-    path.join(PLUGIN_ROOT, '..', 'savyre-cursor-plugin', 'hooks', 'savyre-guard.mjs'),
-    path.join(HOME, 'Documents', 'Projects', 'savyre-cursor-plugin', 'hooks', 'savyre-guard.mjs'),
-    path.join(HOME, '.cursor', 'plugins', 'local', 'savyre-cursor-plugin', 'hooks', 'savyre-guard.mjs'),
-    path.join(HOME, '.claude', 'plugins', 'savyre-cursor-plugin', 'hooks', 'savyre-guard.mjs')
-  ];
-  for (const p of candidates) {
-    if (existsSync(p)) return p;
-  }
+  const sibling = path.join(PLUGIN_ROOT, '..', 'savyre-cursor-plugin', 'hooks', 'savyre-guard.mjs');
+  if (existsSync(sibling)) return sibling;
+
   return null;
 }
 

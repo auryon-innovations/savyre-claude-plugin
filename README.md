@@ -7,7 +7,7 @@ Thin **Claude Code** adapter for the same Savyre Chat workflow used in Cursor.
 - Speaks the same JSON `userMessage` / `nextBacklogItemId` contract
 - Ships the **full Cursor skills pack** + seven-stage candidate skills
 
-**Version:** 0.2.1
+**Version:** 0.2.2
 
 ## What you get
 
@@ -27,10 +27,9 @@ Thin **Claude Code** adapter for the same Savyre Chat workflow used in Cursor.
 ## Prerequisites
 
 1. **Savyre extension** (panel) installed in VS Code/Cursor — stages, lock, validate
-2. **`savyre-cursor-plugin`** available so the guard resolves (one of):
-   - `Documents/Projects/savyre-cursor-plugin`
-   - `~/.cursor/plugins/local/savyre-cursor-plugin`
-   - or `SAVYRE_GUARD_PATH` pointing at `…/hooks/savyre-guard.mjs`
+2. **`savyre-cursor-plugin`** so the guard resolves (one of):
+   - sibling folder next to this pack (`../savyre-cursor-plugin/hooks/savyre-guard.mjs`)
+   - or the plugin option **Savyre guard path** (stored securely; hooks see `CLAUDE_PLUGIN_OPTION_SAVYRE_GUARD_PATH`)
 3. **Claude Code** CLI logged in (`claude auth login`)
 
 ## Install (project) — recommended

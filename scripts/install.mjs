@@ -8,7 +8,6 @@
  *   node scripts/install.mjs check            → verify guard + hook adapter resolve
  */
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'fs';
-import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { resolveGuardPath, pluginRoot } from '../hooks/resolveGuard.mjs';
@@ -136,8 +135,7 @@ function check() {
         ok,
         pluginRoot: pluginRoot(),
         guardPath: guard,
-        hookPath: hook,
-        home: os.homedir()
+        hookPath: hook
       },
       null,
       2

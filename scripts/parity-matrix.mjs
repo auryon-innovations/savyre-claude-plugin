@@ -8,7 +8,6 @@
  */
 import { spawnSync } from 'child_process';
 import { existsSync, readdirSync, readFileSync } from 'fs';
-import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { resolveGuardPath, pluginRoot } from '../hooks/resolveGuard.mjs';
@@ -16,8 +15,6 @@ import { toCursorHookInput, toClaudeHookOutput } from '../hooks/savyre-claude-ho
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
-const home = os.homedir();
-
 const EXPECTED_TOP_SKILLS = [
   'savyre-chat-continuation',
   'savyre-codebase-discovery',
@@ -153,9 +150,9 @@ for (const row of STAGE_ROLES) {
 
 // --- Compare to Cursor if available ---
 const cursorRoots = [
-  path.join(home, 'Documents', 'Projects', 'savyre-cursor-plugin'),
-  path.join(home, '.cursor', 'plugins', 'local', 'savyre-cursor-plugin')
-];
+  path.join(ROOT, '..', 'savyre-cursor-plugin'),
+  process.env.SAVYRE_CURSOR_PLUGIN_ROOT || ''
+].filter(Boolean);
 const cursorRoot = cursorRoots.find((p) => existsSync(path.join(p, 'skills')));
 if (cursorRoot) {
   const cursorSkills = listSkillDirs(path.join(cursorRoot, 'skills'));

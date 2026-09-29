@@ -1,12 +1,22 @@
 {
   "name": "savyre",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Savyre Chat workflow for Claude Code — thin adapter over the shared Savyre guard (same brain as Cursor).",
   "author": {
     "name": "Savyre"
   },
+  "license": "UNLICENSED",
+  "icon": "./icon.svg",
   "keywords": ["savyre", "workflow", "stages", "chat", "hooks"],
   "skills": "./skills",
   "commands": "./commands",
-  "hooks": "./hooks/hooks.json"
+  "userConfig": {
+    "savyre_guard_path": {
+      "type": "file",
+      "title": "Savyre guard path",
+      "description": "Path to savyre-guard.mjs from the Savyre Cursor plugin. Claude Code asks for this when the plugin is enabled and stores it securely.",
+      "sensitive": true,
+      "required": false
+    }
+  }
 }

@@ -12,7 +12,7 @@ const args = process.argv.slice(2);
 const guard = resolveGuardPath();
 if (!guard) {
   process.stderr.write(
-    'Savyre guard not found. Install savyre-cursor-plugin (sibling or ~/.cursor/plugins/local/) or set SAVYRE_GUARD_PATH.\n'
+    'Savyre guard not found. Set CLAUDE_PLUGIN_OPTION_SAVYRE_GUARD_PATH to savyre-guard.mjs, or place savyre-cursor-plugin next to this pack.\n'
   );
   process.exit(1);
 }

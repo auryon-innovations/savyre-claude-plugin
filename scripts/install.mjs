@@ -53,7 +53,7 @@ function hooksConfig() {
       ],
       PostToolUse: [
         {
-          matcher: 'Edit|Write|MultiEdit|NotebookEdit',
+          matcher: 'Edit|Write|MultiEdit|NotebookEdit|Bash|PowerShell',
           hooks: [{ type: 'command', command: hookCmd }]
         }
       ],

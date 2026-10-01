@@ -1,15 +1,24 @@
 {
   "schemaVersion": "1.0.0",
-  "activeSessionId": "wf_fbda501ade10769a",
+  "activeSessionId": "wf_a976b45ebf63519a",
   "sessions": [
     {
-      "sessionId": "wf_fbda501ade10769a",
+      "sessionId": "wf_a976b45ebf63519a",
       "status": "active",
-      "updatedAt": "2026-09-28T07:36:12.419Z",
+      "updatedAt": "2026-09-29T06:24:54.828Z",
       "currentStageId": "01-task-input",
       "completedStages": 0,
       "totalStages": 15,
       "location": "hot"
+    },
+    {
+      "sessionId": "wf_fbda501ade10769a",
+      "status": "paused",
+      "updatedAt": "2026-09-28T07:36:12.419Z",
+      "currentStageId": "01-task-input",
+      "completedStages": 0,
+      "totalStages": 15,
+      "location": "archive"
     },
     {
       "sessionId": "wf_b734eb48fa8532d0",

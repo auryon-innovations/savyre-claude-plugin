@@ -29,7 +29,7 @@ Exempt items: follow the approved alternative verification plan; still do not in
 
 ## Test-author role
 
-When the selected backlog item is an authorized test gap, `savyre-test-author` may add or update Node (`node --test` or `npm test`) or Python (`pytest`) checks for the named AC ids. It must not run while S05 is the active stage. Other stacks are outside v1. The role proposes nothing on its own: the item id has to already be authorized.
+When the selected backlog item is an authorized test gap or a required AC check, `savyre-test-author` **defaults to Playwright** (JS/TS `npx playwright test`, or Playwright Python/Java/C# when that language is already present). Scaffold Playwright if the repo has no runner. Do not default AC checks to `node --test`. It must not run while S05 is the active stage. The role proposes nothing on its own: the item id has to already be authorized.
 
 ## Procedure
 
@@ -43,6 +43,8 @@ When the selected backlog item is an authorized test gap, `savyre-test-author` m
 Produce a concise response with outcome, material question/blocker if any and the verified next action. Detailed content belongs in the assigned draft `change_report.md` or returned preview content when no writer is delegated.
 
 Draft sections: **Actual Changes and Task Status; Plan Reconciliation; Validation Observed; Independent/Self Review Scope; Findings; Deviations and Blockers; Evidence and Next Action**. Omit irrelevant optional detail rather than fill generic sections with invented facts. Structured supporting artifacts: **implementation_status.json/md; code_review.md; code_review_findings.json; tasks/<backlog_item_id>/task_summary.md/task_metadata.json**. Command logs and detailed run evidence stay in runtime-owned run records; item metadata references them. Stage-level files aggregate item states from the same revisions.
+
+**Required before lock:** Write `stages/s04_build_review/code_review.md` with **Independent/Self Review Scope** and **Findings** (IDs/severity when known). Do not leave the stub ("Self-review. No independent reviewer. Findings: none.") as the only content when the change report has review material. Runtime may project a review from `change_report.md` on lock if the file is still a stub; prefer writing the real review yourself.
 
 Required supporting content: Actual task state/source/action evidence; readable status derived from same JSON revision; findings ID/severity/current location/trigger/consequence/check/resolution refs. Source files remain deliverable; change report is derived, not a new ai-output.md implementation authority.
 
